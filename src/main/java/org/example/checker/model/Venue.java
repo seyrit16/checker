@@ -54,5 +54,6 @@ public class Venue {
     @Column(name = "update_at")
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "id")
     private List<EventSession>  eventSessions;
 }

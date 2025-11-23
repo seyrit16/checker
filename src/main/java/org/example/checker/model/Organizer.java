@@ -27,5 +27,6 @@ public class Organizer {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    List<Event> events;
+    @OneToMany(mappedBy = "id")
+    private List<Event> events;
 }

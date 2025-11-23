@@ -35,14 +35,14 @@ public class EventSession {
 
     private LocalDateTime endAt;
 
-    @ColumnDefault("false")
+    @Column(columnDefinition = "varchar(255) default 'false'")
     private Boolean is_online;
 
     private BigDecimal ticketMinPrice;
 
     private BigDecimal ticketMaxPrice;
 
-    @ColumnDefault("RUB")
+    @Column(columnDefinition = "varchar(255) default 'RUB'")
     private String currency;
 
     private String ticketUrl; // Прямая ссылка на страницу покупки билетов для конкретного сеанса.

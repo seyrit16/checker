@@ -56,6 +56,7 @@ public class Event {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "id")
     private List<EventSession> eventSessions;
 
     @ManyToMany(mappedBy = "favoriteEvents")
