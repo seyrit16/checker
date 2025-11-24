@@ -2,7 +2,6 @@ package org.example.checker.service;
 
 import jakarta.transaction.Transactional;
 import org.example.checker.dto.adjacent.SignUpRequest;
-import org.example.checker.mapper.UserMapper;
 import org.example.checker.model.User;
 import org.example.checker.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +16,6 @@ public class UserService {
 
     public UserService(
             UserRepository userRepository,
-            UserMapper userMapper,
             PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;

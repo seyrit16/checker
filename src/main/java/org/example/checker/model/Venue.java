@@ -27,24 +27,10 @@ public class Venue {
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "city_name", nullable = false)
-    private String cityName;
-
     @Column(nullable = false)
     private String address;
 
-    @Column(name = "geo_lat", precision = 9, scale = 6)
-    private BigDecimal geoLat;
-
-    @Column(name = "geo_lng", precision = 9, scale = 6)
-    private BigDecimal geoLng;
-
-    private String website;
-
     private String phone;
-
-    @Column(name = "description",columnDefinition = "TEXT")
-    private String description;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

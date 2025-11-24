@@ -1,12 +1,10 @@
-package org.example.checker.model;
+package org.example.checker.dto.request;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.example.checker.model.Event;
+import org.example.checker.model.Venue;
 import org.example.checker.model.invariants.EventSessionStatus;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,45 +15,18 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "event_session")
-public class EventSession {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Event event;
-
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+@Builder
+@ToString
+public class EventSessionCreateRequest {
+    private Long eventId;
     private Venue venue;
-
     private LocalDateTime startAt;
-
     private LocalDateTime endAt;
-
-    @Column(columnDefinition = "boolean default false")
     private Boolean is_online;
-
     private BigDecimal ticketMinPrice;
-
     private BigDecimal ticketMaxPrice;
-
-    @Column(columnDefinition = "varchar(255) default 'RUB'")
     private String currency;
-
     private String ticketUrl; // Прямая ссылка на страницу покупки билетов для конкретного сеанса.
-
     private String ticketServiceName; // Название билетного сервиса, через который осуществляется продажа.
 
-    @Column(columnDefinition = "varchar(255) default 'PLANNED'")
-    @Enumerated(EnumType.STRING)
-    private EventSessionStatus status;
-
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
 }

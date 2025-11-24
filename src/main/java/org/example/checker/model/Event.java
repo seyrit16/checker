@@ -36,16 +36,21 @@ public class Event {
     @Column(columnDefinition = "TEXT")
     private String fullDescription;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Category category;
+    //todo можно создать сущностью
+    @Column(nullable = false)
+    private String category;
 
     @Column(columnDefinition = "SMALLINT default 0")
     private Integer ageRestriction;
 
     private String coverImageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Organizer organizer;
+    //todo можно создать organizer сущностью
+    @Column(nullable = false)
+    private String organizerName;
+
+    @Column(nullable = false,columnDefinition = "TEXT")
+    private String organizerDescription;
 
     @Enumerated(EnumType.STRING)
     private EventStatus status;
