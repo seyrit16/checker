@@ -47,7 +47,7 @@ public class LocalFileStorageService {
 
     public Resource load(String filename) {
         try {
-            Path file = this.rootLocation.resolve(rootLocation.toAbsolutePath()+filename);
+            Path file = this.rootLocation.resolve(rootLocation.toAbsolutePath() + "\\" + filename);
             Resource resource = new UrlResource(file.toUri());
             if (!resource.exists()){
                 throw new FileNotFoundException("Такой файл не найден.");
