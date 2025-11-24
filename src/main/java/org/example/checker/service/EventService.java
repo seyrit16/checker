@@ -1,15 +1,14 @@
 package org.example.checker.service;
 
-import org.example.checker.controller.FileController;
 import org.example.checker.dto.request.EventCreateRequest;
+import org.example.checker.dto.response.EventResponse;
+import org.example.checker.dto.response.EventResponseFull;
 import org.example.checker.model.Event;
 import org.example.checker.repository.EventRepository;
 import org.example.checker.service.mapper.EventMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.UUID;
 
 @Service
 public class EventService {
@@ -39,5 +38,16 @@ public class EventService {
         event.setCoverImageUrl(file.getOriginalFilename());
 
         save(event);
+    }
+
+    public EventResponse findEventById(Long id) {
+        Event event = eventRepository.findById(id).orElseThrow(() -> new RuntimeException("Событие не найдено: " + id));
+        return eventMapper.toDto(event);
+    }
+
+    public EventResponseFull findFullEventById(Long id) {
+        Event event = eventRepository.findByIdWithSessionsAndVenue(id).orElseThrow(() ->
+                new RuntimeException("Событие не найдено: " + id));
+        return eventMapper.toFullDto(event);
     }
 }

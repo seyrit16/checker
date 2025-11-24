@@ -1,11 +1,14 @@
 package org.example.checker.service;
 
 import org.example.checker.dto.request.EventSessionCreateRequest;
+import org.example.checker.dto.response.EventSessionResponse;
 import org.example.checker.model.EventSession;
 import org.example.checker.repository.EventSessionRepository;
 import org.example.checker.service.mapper.EventSessionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EventSessionService {
@@ -31,5 +34,13 @@ public class EventSessionService {
         eventSession.setEvent(eventService.getById(eventSessionCreateRequest.getEventId()));
 
         save(eventSession);
+    }
+
+    public List<EventSessionResponse> getEventSessionsByEventId(Long eventId) {
+        return eventSessionRepository.findAllByEventIdWithVenue(eventId)
+                .orElseThrow(() -> new RuntimeException("Сессии события не найдены"))
+                .stream()
+                .map(eventSessionMapper::toDto)
+                .toList();
     }
 }

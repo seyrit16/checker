@@ -1,6 +1,7 @@
 package org.example.checker.service.mapper;
 
 import org.example.checker.dto.request.EventSessionCreateRequest;
+import org.example.checker.dto.response.EventSessionResponse;
 import org.example.checker.model.EventSession;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -11,4 +12,5 @@ public interface EventSessionMapper {
     EventSessionMapper INSTANCE = Mappers.getMapper(EventSessionMapper.class);
 
     EventSession toEntity(EventSessionCreateRequest dto);
+    EventSessionResponse toDto(EventSession entity);
 }
