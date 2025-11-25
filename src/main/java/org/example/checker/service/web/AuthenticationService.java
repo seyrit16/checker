@@ -4,6 +4,7 @@ import org.example.checker.configuration.security.components.CheckerUserDetails;
 import org.example.checker.dto.adjacent.JwtAuthenticationResponse;
 import org.example.checker.dto.adjacent.SignInRequest;
 import org.example.checker.dto.adjacent.SignUpRequest;
+import org.example.checker.dto.adjacent.UserData;
 import org.example.checker.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,11 +33,12 @@ public class AuthenticationService {
         String jwtToken = jwtService.generateToken(userDetails);
         CheckerUserDetails checkerUserDetails = (CheckerUserDetails) userDetails;
         return new JwtAuthenticationResponse(
-                jwtToken/*,
+                jwtToken,
                 new UserData(
                         checkerUserDetails.getName(),
                         checkerUserDetails.getUsername(),
-                        (checkerUserDetails.getRole().equals("ADMIN") ? "su" : "u"))*/);
+                        (checkerUserDetails.getRole().equals("ADMIN") ? "su" : "u"),
+                        checkerUserDetails.getPhone()));
     }
 
     public JwtAuthenticationResponse signUp(SignUpRequest request) {

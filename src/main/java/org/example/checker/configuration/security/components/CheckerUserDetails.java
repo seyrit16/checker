@@ -64,4 +64,8 @@ public class CheckerUserDetails implements UserDetails {
     public String getRole() {
         return user.getRole();
     }
+
+    public String getPhone() {
+        return user.getPhone();
+    }
 }

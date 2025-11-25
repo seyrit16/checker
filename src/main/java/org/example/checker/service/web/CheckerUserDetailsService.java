@@ -38,6 +38,7 @@ public class CheckerUserDetailsService implements UserDetailsService {
         userDto.setEmail(usr.getEmail());
         userDto.setPassword(usr.getPassword());
         userDto.setRole(usr.getRole());
+        userDto.setPhone(usr.getPhone());
 
         return Optional.of(userDto);
     }

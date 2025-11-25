@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.checker.dto.adjacent.JwtAuthenticationResponse;
 import org.example.checker.dto.adjacent.SignInRequest;
 import org.example.checker.dto.adjacent.SignUpRequest;
+import org.example.checker.dto.adjacent.UserData;
 import org.example.checker.service.web.AuthenticationService;
 import org.example.checker.service.web.CookieService;
 import org.springframework.http.ResponseEntity;
@@ -25,19 +26,19 @@ public class AuthenticationController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<Object> signUp(@RequestBody SignUpRequest signUpRequest,
-                                         HttpServletResponse response) {
+    public ResponseEntity<UserData> signUp(@RequestBody SignUpRequest signUpRequest,
+                                           HttpServletResponse response) {
         JwtAuthenticationResponse jwtAuthenticationResponse = authenticationService.signUp(signUpRequest);
         cookieService.setJwtToken(response, jwtAuthenticationResponse.getToken());
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(jwtAuthenticationResponse.getUserData());
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<Object> signIn(@RequestBody SignInRequest signInRequest,
+    public ResponseEntity<UserData> signIn(@RequestBody SignInRequest signInRequest,
                                          HttpServletResponse response) {
         JwtAuthenticationResponse jwtAuthenticationResponse = authenticationService.signIn(signInRequest);
         cookieService.setJwtToken(response, jwtAuthenticationResponse.getToken());
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(jwtAuthenticationResponse.getUserData());
     }
 
     @PostMapping("/logout")
