@@ -18,7 +18,7 @@ public class DataBaseInitializationConfig {
     public CommandLineRunner initDataBase() {
         return args -> {
             if (!userService.existsByRole("ADMIN"))
-                userService.save(new SignUpRequest("ADMIN", "ADMIN","ADMIN", "ADMIN"), "ADMIN");
+                userService.save(new SignUpRequest("ADMIN", "ADMIN@mail.ru","ADMIN", "ADMIN"), "ADMIN");
         };
     }
 }

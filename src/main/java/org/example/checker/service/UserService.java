@@ -3,6 +3,7 @@ package org.example.checker.service;
 import jakarta.transaction.Transactional;
 import org.example.checker.dto.adjacent.SignUpRequest;
 import org.example.checker.model.User;
+import org.example.checker.model.invariants.Role;
 import org.example.checker.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UserService {
 
             user.setEmail(signUpRequest.getEmail());
             user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-            user.setRole(role);
+            user.setRole(Role.valueOf(role));
             user.setName(signUpRequest.getName());
             user.setPhone(signUpRequest.getPhone());
 
@@ -37,6 +38,6 @@ public class UserService {
     }
 
     public boolean existsByRole(String role) {
-        return userRepository.existsByRole(role);
+        return userRepository.existsByRole(Role.valueOf(role));
     }
 }

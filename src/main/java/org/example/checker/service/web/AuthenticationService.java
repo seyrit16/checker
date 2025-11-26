@@ -37,7 +37,8 @@ public class AuthenticationService {
                 new UserData(
                         checkerUserDetails.getName(),
                         checkerUserDetails.getUsername(),
-                        (checkerUserDetails.getRole().equals("ADMIN") ? "su" : "u"),
+                        (checkerUserDetails.getRole().equals("ADMIN") ? "admin" :
+                                (checkerUserDetails.getRole().equals("organizer") ? "organizer" : "user")),
                         checkerUserDetails.getPhone()));
     }
 

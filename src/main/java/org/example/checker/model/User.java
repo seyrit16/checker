@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.checker.model.invariants.Role;
 
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(nullable = false)
     private String phone;
