@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface EventRepository extends CrudRepository<Event,Long> {
@@ -15,4 +16,6 @@ public interface EventRepository extends CrudRepository<Event,Long> {
         WHERE e.id = :eventId
         """)
     Optional<Event> findByIdWithSessionsAndVenue(@Param("eventId") Long eventId);
+
+    List<Event> findAll();
 }

@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/event")
 public class EventController {
@@ -40,5 +42,10 @@ public class EventController {
     public ResponseEntity<EventResponseFull> getEventFull(@PathVariable Long event_id) {
         EventResponseFull eventResponseFull = eventService.findFullEventById(event_id);
         return ResponseEntity.ok(eventResponseFull);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<EventResponse>> getAllEvents() {
+        return ResponseEntity.ok(eventService.findAllEvents());
     }
 }
