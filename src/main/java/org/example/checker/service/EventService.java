@@ -23,21 +23,22 @@ public class EventService {
         this.localFileStorageService = localFileStorageService;
     }
 
-    public void save(Event event){
-        eventRepository.save(event);
+    public Event save(Event event){
+        return eventRepository.save(event);
     }
 
     public Event getById(Long id){
         return eventRepository.findById(id).orElseThrow(()-> new RuntimeException("Событие не найдено: " + id));
     }
 
-    public void createEvent(EventCreateRequest eventCreateRequest, MultipartFile file) {
+    public EventResponse createEvent(EventCreateRequest eventCreateRequest, MultipartFile file) {
         Event event = eventMapper.toEntity(eventCreateRequest);
 
         localFileStorageService.save(file);
         event.setCoverImageUrl(file.getOriginalFilename());
 
-        save(event);
+        Event savedEvent = save(event);
+        return eventMapper.toDto(savedEvent);
     }
 
     public EventResponse findEventById(Long id) {

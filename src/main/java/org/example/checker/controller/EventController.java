@@ -24,9 +24,10 @@ public class EventController {
 
     @PostMapping(value = "/create",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createEvent(@RequestPart("event") EventCreateRequest event,
+    public ResponseEntity<EventResponse> createEvent(@RequestPart("event") EventCreateRequest event,
                             @RequestPart("eventCover") MultipartFile eventCover) {
-        eventService.createEvent(event, eventCover);
+        EventResponse eventResponse = eventService.createEvent(event, eventCover);
+        return new ResponseEntity<>(eventResponse, HttpStatus.CREATED);
     }
 
     @GetMapping("/{event_id}")
